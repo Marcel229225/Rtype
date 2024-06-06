@@ -106,7 +106,7 @@ In order to be more professionnal we decide to use a norm for GIT modification, 
 - [X] Freud LALEYE aka freud.laleye@epitech.eu
 - [X] Guy HAZOUME aka guy.hazoume@epitech.eu
 - [X] Héritier DAGA aka heritier.daga@epitech.eu
-- [X] Marcel YOBO aka marcel.yobo@epitech.eu
+- [X] Dylan YOBO aka marcelyobo@gmail.com
 
 # GOOD LUCK AND TO THE INFINITE AND BEYOND!
 <p align="center"><br/><br/><img src="https://thumbs.gfycat.com/WastefulVeneratedBluebird-size_restricted.gif"width="500"></p>
