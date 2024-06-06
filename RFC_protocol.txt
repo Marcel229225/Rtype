@@ -1,0 +1,167 @@
+EPITECH Cotonou                            A.Jordan
+Request for Comments:                      D.Heritier
+                                           H.Harrysson
+                                           L.Freud
+                                           Y.Dylan
+                                           Epitech, Cotonou
+                                           Octobre, 2022
+
+
+                        R-TYPE Protocols
+
+Content of this file
+
+   This file is the official specification of the R-Type UDP Protocol. 
+   The R-Type is a third year project from EPITECH BENIN. Distribution of this memo is
+   unlimited.    
+
+Table of Contents
+
+   1.   Introduction . . . . . . . . . . . . . . . . . . . . . . . .  1
+   2.   R-Type architecture  . . . . . . . . . . . . . . . . . . . .  2
+   3.   R-Type UDP Protocol  . . . . . . . . . . . . . . . . . . . .  3
+   3a.  Frames transmission . . . . . . . . . . . . . . . . . . . . . 3
+   3b.  Player events . . . . . . . . . . . . . . . . . . . . . . . . 3  
+   4.   Code Events . . . . . . . . . . . . . . . . . . . . . . . . . 4  
+   4a.  Command-Reply Sequences with an example . . . . . . . . . . . 4  
+   4b.  Command-Reply Sequences. . . . . . . . . . . . . . . . . . .  4  
+
+
+1.  Introduction
+
+   The goal of the R-Type project is to implement a multithreaded server and 
+   a graphical client for a game called R-Type, using an engine of our own design..
+
+
+
+2.  R-Type architecture
+
+   Basicly the R-Type architecture is a classic client-server game architecture.
+   All the game engine is in the game source folder. A client connects to the server
+   by using the R-Type UDP protocol. When connected, the client can lunch the game's 
+   home screen. Multiple clients can connect to the server at the same time.         
+
+
+3.  R-Type UDP Protocol
+    
+    Once the game is started, the client-server communications are done by using the 
+    R-Type UDP Protocol.
+
+    3a.  Frames transmission
+   
+   The first goal of the R-Type UDP Protocol is to send all the
+   frames to display (in the client) from the server to the client.
+   UDP is a faster, simpler, and efficient protocol, however 
+   retransmission of lost data packets can't be possible with this protocol. 
+
+    3b.  Player events
+
+   The player, on the client-side, can execute a lot of actions. On
+   each player action, the client MUST send to the server some specific
+   informations based on the action he want to do. 
+
+      The connection and deconnection to the server Event :
+
+          If the player want to play our game he must be connected to the server, and
+          when the moments is over he must be deconnected.
+
+      The Move Event :
+
+         The player wants to move (to the left, right, up or down).
+         The client MUST use the directionnal keyboard keys. This is
+         a look of the Event Enumaration :
+
+         enum Inputs {
+          NO_TYPE = -1,
+          ENTER_KEY,
+          LEFT_ARROW,
+          RIGHT_ARROW,
+          UP_ARROW,
+          DOWN_ARROW,
+          QUIT,
+          SPACE_BAR,
+          NO_SPACE_BAR,
+          BUTTON
+       };
+
+      The Shoot Event :
+
+         In our game the player can shoot a lot of ennemies with a ball of fire.
+         Positions are load and send to the server.
+         This is the Event struct :
+         
+         struct fire {
+          int id;
+          int idx;
+          int degat;
+          bool is_fire;
+          drawable_rect rect;
+      };
+
+      The Enemy Event :
+         Like we said the player can beats several enemies.
+         This is the Event Struct:
+         Positions are load and of course are send to the server.
+        
+         struct Ennemy {
+           int id;
+           drawable_rect rect;
+      };
+
+
+4.  Code Events 
+	
+	> User connection
+		server : [id] IS CONNECTED
+    
+	> User disconnect
+		client : [id] IS DECONNECTED
+	
+	> User move
+
+		.UP
+			client : [ID] UP
+			server : [ID] new position (player position)
+
+		.Down
+			client : [ID] DOWN
+			server : [ID] new position (player position)
+
+		.Right
+			client : [ID] RIGHT
+			server : [ID] new position (player position)
+
+		.Left
+			client : [ID] LEFT
+			server : [ID] new position (player position)
+	
+	> User attack
+
+		client: [ID] WILL START 
+		server: Temp [Time]
+	
+	> User collision
+
+		.Meteorite
+			client: [ID] COLLISION METEORITE
+			server: [ID] METEORITE
+
+		.Ennemy
+			client: [ID] COLLISION ENNEMY
+			server: [ID] ENEMY
+
+		.Attack of ennemy
+			client: [ID] COLLISION ATTACK OF ENNEMY
+			server: [ID] ATTACK OF ENNEMY
+		
+		.Power up
+			client: [ID] collision power up
+			server: [ID] POWER UP
+
+   
+
+
+
+
+
+                       

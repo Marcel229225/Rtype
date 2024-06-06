@@ -1,0 +1,16 @@
+[requires]
+sfml/2.5.1
+enet/1.3.17
+
+[options]
+*:shared = False
+sfml:graphics=True
+sfml:window=True
+sfml:audio=True
+sfml:network=True
+
+[imports]
+lib, libsfml.so -> ./r-type_client
+
+[generators]
+cmake
